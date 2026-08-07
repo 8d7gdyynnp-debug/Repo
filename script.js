@@ -26,7 +26,20 @@ function getAudioContext() {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return null;
   audioCtx = new AudioContextClass();
+  unlockAudioContext(audioCtx);
   return audioCtx;
+}
+
+// iOS Safari needs an actual sound (even a silent one) started synchronously
+// inside the first user gesture to fully wake up its audio hardware -
+// resume() alone isn't always enough.
+function unlockAudioContext(ctx) {
+  const unlockBuffer = ctx.createBuffer(1, 1, 22050);
+  const unlockSource = ctx.createBufferSource();
+  unlockSource.buffer = unlockBuffer;
+  unlockSource.connect(ctx.destination);
+  unlockSource.start(0);
+  if (ctx.resume) ctx.resume();
 }
 
 function playPlop() {

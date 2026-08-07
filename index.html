@@ -2,26 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tic-Tac-Toe</title>
+  <title>Aloha Tic-Tac-Toe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Tic-Tac-Toe</h1>
-  <p id="status">X's turn</p>
+  <div class="waves"></div>
 
-  <div id="board">
-    <button class="cell" data-index="0"></button>
-    <button class="cell" data-index="1"></button>
-    <button class="cell" data-index="2"></button>
-    <button class="cell" data-index="3"></button>
-    <button class="cell" data-index="4"></button>
-    <button class="cell" data-index="5"></button>
-    <button class="cell" data-index="6"></button>
-    <button class="cell" data-index="7"></button>
-    <button class="cell" data-index="8"></button>
-  </div>
+  <main>
+    <h1>🌺 Aloha Tic-Tac-Toe 🌴</h1>
 
-  <button id="reset">Restart Game</button>
+    <div class="mode-select">
+      <label class="mode-option">
+        <input type="radio" name="mode" value="2player" checked />
+        Two Player
+      </label>
+      <label class="mode-option">
+        <input type="radio" name="mode" value="computer" />
+        Vs Computer
+      </label>
+    </div>
+
+    <p id="status">Palm Tree's turn</p>
+
+    <div id="board">
+      <button class="cell" data-index="0"></button>
+      <button class="cell" data-index="1"></button>
+      <button class="cell" data-index="2"></button>
+      <button class="cell" data-index="3"></button>
+      <button class="cell" data-index="4"></button>
+      <button class="cell" data-index="5"></button>
+      <button class="cell" data-index="6"></button>
+      <button class="cell" data-index="7"></button>
+      <button class="cell" data-index="8"></button>
+    </div>
+
+    <button id="reset">🐚 Restart Game 🐚</button>
+  </main>
 
   <script src="script.js"></script>
 </body>

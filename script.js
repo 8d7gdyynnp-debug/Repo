@@ -2,16 +2,31 @@ const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const resetButton = document.getElementById("reset");
 const modeInputs = document.querySelectorAll('input[name="mode"]');
+const levelInputs = document.querySelectorAll('input[name="level"]');
+const levelSelect = document.getElementById("levelSelect");
+const levelCaption = document.getElementById("levelCaption");
 
 const HUMAN = "X";
 const COMPUTER = "O";
 const SYMBOL = { X: "🌴", O: "🌺" };
 const NAME = { X: "Palm Tree", O: "Hibiscus" };
 
+// Chance the computer plays its best (minimax) move rather than a random
+// one. Level 1 never plays its best move (easily beaten); level 5 always
+// does (unbeatable).
+const LEVELS = {
+  1: { bestMoveChance: 0, caption: "Easy — beatable by a small child" },
+  2: { bestMoveChance: 0.25, caption: "Casual" },
+  3: { bestMoveChance: 0.5, caption: "Medium — a fair challenge" },
+  4: { bestMoveChance: 0.75, caption: "Tough" },
+  5: { bestMoveChance: 1, caption: "Unbeatable" },
+};
+
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = HUMAN;
 let gameActive = true;
 let mode = "2player"; // "2player" or "computer"
+let level = 3;
 
 const winningCombos = [
   [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
@@ -186,8 +201,17 @@ function checkResult(player) {
 
 function computerMove() {
   if (!gameActive) return;
-  const { index } = bestMove();
+
+  const playsBest = Math.random() < LEVELS[level].bestMoveChance;
+  const index = playsBest ? bestMove().index : randomMove();
   makeMove(index, COMPUTER);
+}
+
+function randomMove() {
+  const emptySpots = board
+    .map((value, index) => (value === "" ? index : null))
+    .filter((index) => index !== null);
+  return emptySpots[Math.floor(Math.random() * emptySpots.length)];
 }
 
 // Unbeatable computer opponent using the minimax algorithm.
@@ -233,6 +257,16 @@ resetButton.addEventListener("click", resetGame);
 modeInputs.forEach((input) =>
   input.addEventListener("change", (event) => {
     mode = event.target.value;
+    const isComputerMode = mode === "computer";
+    levelSelect.hidden = !isComputerMode;
+    levelCaption.hidden = !isComputerMode;
+    resetGame();
+  })
+);
+levelInputs.forEach((input) =>
+  input.addEventListener("change", (event) => {
+    level = Number(event.target.value);
+    levelCaption.textContent = LEVELS[level].caption;
     resetGame();
   })
 );

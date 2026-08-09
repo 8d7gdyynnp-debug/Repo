@@ -52,14 +52,14 @@ h1 {
   font-size: 1.6em;
   color: #d6552e;
   text-shadow: 0.05em 0.05em 0 #fff;
-  margin: 0 0 0.5em;
+  margin: 0 0 0.35em;
 }
 
 .mode-select {
   display: flex;
   gap: 0.5em;
   justify-content: center;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.35em;
   flex-wrap: wrap;
 }
 
@@ -82,11 +82,69 @@ h1 {
   color: #fff;
 }
 
+.level-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  margin-bottom: 0.15em;
+  flex-wrap: wrap;
+}
+
+.level-select[hidden] {
+  display: none;
+}
+
+.level-label {
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-right: 0.1em;
+}
+
+.level-option {
+  position: relative;
+  width: 1.7em;
+  height: 1.7em;
+  background: #fff8ea;
+  border: 0.1em solid #f0b24a;
+  border-radius: 50%;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.level-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.level-option:has(input:checked) {
+  background: #f0b24a;
+  color: #fff;
+}
+
+.level-caption {
+  font-size: 0.78em;
+  font-style: italic;
+  color: #17505f;
+  margin: 0 0 0.3em;
+}
+
+.level-caption[hidden] {
+  display: none;
+}
+
 #status {
   font-family: "Baloo 2", sans-serif;
   font-size: 1em;
   color: #17505f;
-  margin: 0 0 0.5em;
+  margin: 0 0 0.35em;
 }
 
 #board {
@@ -96,7 +154,7 @@ h1 {
   gap: 0.35em;
   width: 100%;
   aspect-ratio: 1;
-  margin: 0 auto 0.6em;
+  margin: 0 auto 0.5em;
 }
 
 .cell {
